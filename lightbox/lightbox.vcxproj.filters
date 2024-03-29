@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="cfg\cfg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="util\helpers.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ui.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="lang\lang.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\db.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\argon2\argon2.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\argon2\core.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\argon2\encoding.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\argon2\opt.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\argon2\thread.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\argon2\blake2\blake2b.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\enc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="pw\pw.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="db\enc\AES\AES.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\glad.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\gui.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\window.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui_demo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui_draw.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui_impl_glfw.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui_impl_opengl3.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui_tables.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\imgui\imgui_widgets.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cfg\cfg.h" />
+    <ClInclude Include="util\helpers.h" />
+    <ClInclude Include="ui\ui.h" />
+    <ClInclude Include="lang\lang.h" />
+    <ClInclude Include="db\db.h" />
+    <ClInclude Include="db\enc\argon2\blake2\blake2.h" />
+    <ClInclude Include="db\enc\argon2\blake2\blake2-impl.h" />
+    <ClInclude Include="db\enc\argon2\blake2\blamka-round-opt.h" />
+    <ClInclude Include="db\enc\argon2\blake2\blamka-round-ref.h" />
+    <ClInclude Include="db\enc\argon2\argon2.h" />
+    <ClInclude Include="db\enc\argon2\core.h" />
+    <ClInclude Include="db\enc\argon2\encoding.h" />
+    <ClInclude Include="db\enc\argon2\thread.h" />
+    <ClInclude Include="db\io\json.hpp" />
+    <ClInclude Include="db\io\json_fwd.hpp" />
+    <ClInclude Include="db\enc\enc.h" />
+    <ClInclude Include="pw\pw.h" />
+    <ClInclude Include="db\enc\AES\AES.h" />
+    <ClInclude Include="gui\gui.h" />
+    <ClInclude Include="gui\window.h" />
+    <ClInclude Include="gui\imgui\imconfig.h" />
+    <ClInclude Include="gui\imgui\imgui.h" />
+    <ClInclude Include="gui\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="gui\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="gui\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="gui\imgui\imgui_internal.h" />
+    <ClInclude Include="gui\imgui\imstb_rectpack.h" />
+    <ClInclude Include="gui\imgui\imstb_textedit.h" />
+    <ClInclude Include="gui\imgui\imstb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\ico0n.ico" />
+  </ItemGroup>
+</Project>
