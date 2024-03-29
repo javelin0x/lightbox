@@ -1,7 +1,10 @@
-## IMPORTANT:
+## Showcase
+#![Uploading lbb.gif…]()
+
+# IMPORTANT:
 This repository is in BETA, there's lots to refactor, update, and change. Don't rely on this for your actual password managing needs, encryption and more security features need to be updated before it's solid for everyday use.
 
-# ![loogo2](https://github.com/javelin0x/lightbox/assets/162154063/7711ee73-9d31-4740-8061-5e1bdf1e0b70) lightbox 
+# ![loogo2](https://github.com/javelin0x/lightbox/assets/162154063/1948ee9d-aa36-464f-8fdc-f8d787981e25) lightbox 
 is an **offline password manager** for **Windows** systems, it uses modern encryption and hashing standards (Argon2, AES256) and does a lot of what you'd want a password manager to do.
 
 ## How to use it?
