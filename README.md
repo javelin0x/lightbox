@@ -32,6 +32,7 @@ Don't open other people's databases you get sent or find. Not a good idea, speci
 ## Dependencies (vcpkg)
 - GLFW3
 - glad
+- libsodium
 
 ## Credits
 [this great fren](https://github.com/oiyl) for the help designing the gui!
