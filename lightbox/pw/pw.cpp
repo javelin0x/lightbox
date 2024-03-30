@@ -4,6 +4,8 @@
 #include <Windows.h>
 #include <wincrypt.h>
 
+#include <sodium.h>
+
 namespace pw {
 	std::string random_pw(int allowed_chars_opt, const int pw_length)
 	{
@@ -33,36 +35,15 @@ namespace pw {
 			}break;
 		}
 
-		size_t num_chars = allowed_chars.size() - 1;
-		HCRYPTPROV crypto_provider;
-		if (!CryptAcquireContext(&crypto_provider, NULL, NULL, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
-			return "ERROR";
-		}
+		unsigned char random_data[256];
+		randombytes_buf(random_data, sizeof random_data);
 
-		BYTE random_data[64] = { 0 };
-		if (!CryptGenRandom(crypto_provider, sizeof(random_data), random_data)) {
-			CryptReleaseContext(crypto_provider, 0);
-			return "ERROR";
-		}
-
-		std::mt19937_64 eng(reinterpret_cast<uint64_t&>(random_data));
-		/*
-		std::random_device device;
-		std::seed_seq seq{ device(), device(), device(), device() }; 
-		std::mt19937_64 eng(seq);
-
-		std::uniform_int_distribution<> distr(0, (int)num_chars - 1);
-		*/
-
-		std::uniform_int_distribution<> distr(0, (int)num_chars - 1);
+		std::uniform_int_distribution<> distr(0, (int)allowed_chars.size() - 1);
 		std::string pw;
-
-		for (int i = 0; i < pw_length; i++)
-		{
-			pw += allowed_chars[distr(eng)];
+		for (size_t i = 0; i < pw_length; i++) {
+			size_t index = random_data[i] % allowed_chars.size();
+			pw += allowed_chars[index];
 		}
-
-		CryptReleaseContext(crypto_provider, 0);
 
 		return pw;
 	}
