@@ -23,4 +23,8 @@ None. This password manager is built for offline use, it doesn't communicate wit
 Don't open other people's databases you get sent or find. Not a good idea, specially with this being on beta.
 
 ## Credits
-https://github.com/cocainewoman
+https://github.com/cocainewoman for the help designing the gui!
+https://github.com/nlohmann for the JSON parsing library
+https://github.com/mrdcvlsc for the AES enc/dec library
+https://github.com/P-H-C/phc-winner-argon2 for the argon2 hashing library
+https://github.com/ocornut/imgui/ for dear imgui
