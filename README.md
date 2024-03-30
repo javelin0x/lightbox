@@ -1,5 +1,5 @@
 ## Showcase
-#![Uploading lbb.gif…]()
+![lbb](https://github.com/javelin0x/lightbox/assets/162154063/622a2ae6-c5a5-4cc4-811b-7208197b6a04)
 
 # IMPORTANT:
 This repository is in BETA, there's lots to refactor, update, and change. Don't rely on this for your actual password managing needs, encryption and more security features need to be updated before it's solid for everyday use.
