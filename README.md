@@ -24,6 +24,3 @@ Don't open other people's databases you get sent or find. Not a good idea, speci
 
 ## Credits
 https://github.com/cocainewoman
-
-## Screenshots
-![Screenshot_31](https://github.com/javelin0x/lightbox/assets/162154063/a4aae1e6-0710-4b91-a5cb-2459cefe2993)
