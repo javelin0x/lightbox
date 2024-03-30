@@ -32,7 +32,7 @@ None. This password manager is built for offline use, it doesn't communicate wit
 Don't open other people's databases you get sent or find. Not a good idea, specially with this being on beta.
 
 ## Credits
-mysterious man for the help designing the gui!
+[this great fren](https://github.com/oiyl) for the help designing the gui!
 
 [nlohmann's JSON library](https://github.com/nlohmann)
 
