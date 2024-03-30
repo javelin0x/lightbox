@@ -46,6 +46,7 @@ bool adding_cred = false;
 static char cred_title_buf[256] = "";
 static char cred_user_buf[256] = "";
 static char cred_pw_buf[256] = "";
+static char master_pw_buf[256] = "";
 
 std::string login_txt = "login";
 std::string logged_in_txt = "database";
@@ -55,6 +56,10 @@ std::string debug_txt = "debug";
 std::string about_txt = "about";
 
 std::string db_path_hint = "C:/...";
+
+//DB
+std::string pw_hash;
+std::string db_content;
 
 //wnd properties (cfg)
 float wnd_border_color_f[4] = { 0.29f, 0.64f, 0.64f };
@@ -77,6 +82,27 @@ void colored_text(const char* text)
 		ImGui::TextUnformatted(text + i, text + i + 1);
 
 		ImGui::PopStyleColor();
+	}
+}
+
+void clear_strings(int logged)
+{
+	if (logged)
+	{
+		SecureZeroMemory(cred_pw_buf, sizeof(cred_pw_buf));
+		SecureZeroMemory(cred_user_buf, sizeof(cred_user_buf));
+		SecureZeroMemory(master_pw_buf, sizeof(master_pw_buf));
+		SecureZeroMemory(cred_title_buf, sizeof(cred_title_buf));
+	} else {
+		helpers::clear_string(pw_hash);
+		helpers::clear_string(db_content);
+		pw_hash.clear();
+		db_content.clear();
+
+		SecureZeroMemory(cred_pw_buf, sizeof(cred_pw_buf));
+		SecureZeroMemory(cred_user_buf, sizeof(cred_user_buf));
+		SecureZeroMemory(master_pw_buf, sizeof(master_pw_buf));
+		SecureZeroMemory(cred_title_buf, sizeof(cred_title_buf));
 	}
 }
 
@@ -110,6 +136,9 @@ void wnd_controls(ImDrawList* draw_list)
 	 ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 3.5f);
 	if (ImGui::Button("x", ImVec2(14.0f, 20.0f))) {
 		gui::closed = true;
+
+		clear_strings(false);
+
 		ImGui::PopFont();
 		ImGui::PopStyleColor(4);
 
@@ -148,8 +177,6 @@ void glow_dot()
 }
 std::vector<credential> creds;
 bool db_loaded = false;
-std::string pw_hash;
-std::string db_content;
 
 void login_tab(ImVec2 drawing_area_size)
 {
@@ -214,7 +241,6 @@ void login_tab(ImVec2 drawing_area_size)
 	ImGui::PopFont();
 
 	ImGui::PushFont(lexend_bold_medium);
-	static char master_pw_buf[256] = "";
 	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.0f);
 	ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 50.0f);
 	ImGui::PushStyleColor(ImGuiCol_Text, ImColor(31, 31, 31).operator ImVec4());
@@ -256,10 +282,10 @@ void login_tab(ImVec2 drawing_area_size)
 			{
 				logged_in = false;
 				db_loaded = false;
+				clear_strings(false);
 			}
-			strcpy_s(master_pw_buf, "");
-			master_pw_str.empty();
-			pw_hash.empty();
+
+			clear_strings(true);
 		}
 		
 	}
@@ -274,9 +300,7 @@ void login_tab(ImVec2 drawing_area_size)
 		db_content = enc::decrypt_enc_file(cfg::_path, pw_hash);
 		creds = database::load_db(db_content);
 		db_loaded = true;
-		strcpy_s(master_pw_buf, "");
-		master_pw_str.empty();
-		pw_hash.empty();
+		clear_strings(true);
 		logged_in = true;
 	}
 	ImGui::PopStyleColor(3);
@@ -525,8 +549,8 @@ void creds_table(ImDrawList* draw_list)
 				ImGui::PopStyleVar();
 				ImGui::PopStyleColor(3);
 				db_loaded = false;
-				db_content.clear();
-				pw_hash.clear();
+				helpers::clear_string(db_content);
+				helpers::clear_string(pw_hash);
 				strcpy_s(cred_user_buf, "");
 				strcpy_s(cred_pw_buf, "");
 				return;
@@ -606,61 +630,10 @@ void creds_table(ImDrawList* draw_list)
 
 void db_tab(ImVec2 drawing_area_size, ImDrawList* draw_list)
 {
-	/*
-	ImGui::PushFont(lexend_regular_small);
-	ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 10.0f, ImGui::GetCursorPosY() + 15.0f));
-	std::string db_name_txt = "db: " + cfg::db_name;
-	ImGui::Text(db_name_txt.c_str());
-
-	ImGui::PushStyleColor(ImGuiCol_Button, ImColor(70, 148, 142).operator ImVec4());
-	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(44, 94, 91).operator ImVec4());
-	ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(32, 74, 71).operator ImVec4());
-	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 5.0f);
-	ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.0f);
-	if (ImGui::Button("add credential"))
-	{
-		adding_cred ? adding_cred = false : adding_cred = true;
-	}
-	ImGui::SameLine();
-	if (ImGui::Button("close db")) {
-		logged_in = false;
-		creds.clear();
-		ImGui::PopFont();
-		ImGui::PopStyleVar();
-		ImGui::PopStyleColor(3);
-		db_loaded = false;
-		db_content.clear();
-		pw_hash.clear();
-		strcpy_s(cred_user_buf, "");
-		strcpy_s(cred_pw_buf, "");
-		return;
-	}
-	ImGui::SameLine();
-	if (ImGui::Button("save")) {
-		ImGui::PopFont();
-		ImGui::PopStyleVar();
-		ImGui::PopStyleColor(3);
-		database::save_db(db_content, pw_hash);
-		return;
-	}
-	ImGui::PopFont();
-
-	ImGui::PushStyleColor(ImGuiCol_Text, ImColor(255, 255, 255).operator ImVec4());
-	ImGui::PushFont(lexend_bold_small);
-	 */
 	if (db_loaded)
 	{
 		creds_table(draw_list);
 	}
-
-	//ImGui::SetCursorPos(ImVec2(ImGui::GetWindowSize().x - 70.0f, ImGui::GetWindowSize().y - 25.0f));
-	
-	
-	//ImGui::PopStyleVar();
-
-
-	//&ImGui::PopFont();
-	//ImGui::PopStyleColor(4);
 }
 
 int pw_char_opt = 0;
@@ -788,20 +761,15 @@ void add_cred_wnd(ImDrawList* draw_list)
 		new_cred.password = cred_pw_buf;
 		new_cred.title = cred_title_buf;
 		db_content = database::add_credential(creds, new_cred, db_content);
-		strcpy_s(cred_user_buf, "");
-		strcpy_s(cred_pw_buf, "");
-		strcpy_s(cred_title_buf, "");
+		clear_strings(true);
 		adding_cred = false;
-
-		//window::create_window();
 	}
 
 	ImGui::SameLine();
 
 	if (ImGui::Button("cancel"))
 	{
-		strcpy_s(cred_user_buf, "");
-		strcpy_s(cred_pw_buf, "");
+		clear_strings(true);
 
 		adding_cred = false;
 	}
@@ -814,59 +782,7 @@ void add_cred_wnd(ImDrawList* draw_list)
 
 void debug_tab(ImVec2 drawing_area_size, ImDrawList* draw_list)
 {
-	/*
-	ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 8.0f);
-	ImGui::PushFont(lexend_regular_small);
-	ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() + 10.0f, ImGui::GetCursorPosY() + 15.0f));
-	if (ImGui::Button("load db"))
-	{
-		if (cfg::_path == "NONE")
-		{
-			ImGui::PopStyleVar();
-			ImGui::PopFont();
-			return;
-		}
-		//creds = database::load_db();
-		if (creds.size() == 0) {
-			ImGui::PopFont();
-			ImGui::PopStyleVar();
-
-			return;
-		}
-		db_loaded = true;
-	}
-
-
-	ImGui::PopStyleVar();
-
-	if (db_loaded)
-	{
-		ImGui::SetCursorPosX(ImGui::GetCursorPosX() + 10.0f);
-		if (ImGui::BeginTable("creds", 2)) {
-			ImGui::TableSetupColumn("user", ImGuiTableColumnFlags_WidthFixed);
-			ImGui::TableSetupColumn("pw", ImGuiTableColumnFlags_WidthFixed);
-
-			ImGui::TableHeadersRow();
-			for (int row = 0; row < creds.size(); row++) {
-				ImGui::TableNextRow();
-				for (int column = 0; column < 2; column++) {
-					ImGui::TableSetColumnIndex(column);
-					if (column == 0)ImGui::Text(creds.at(row).user.c_str());
-					if (column == 1)ImGui::Text(creds.at(row).password.c_str());
-				}
-			}
-
-			ImGui::EndTable();
-		}
-	}
-	
-
-	ImGui::PopFont();
-	ImGui::SameLine();*/
-
-	//std::vector<credential> creds_dbg { { "weew", "wee", "weewoo"},}
-
-	creds_table(draw_list);
+	//creds_table(draw_list);
 }
 
 
@@ -887,7 +803,7 @@ namespace gui {
 
 		ImGui::Begin("lightbox", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
 		
-		/*
+		
 		if (ImGui::IsMouseHoveringRect(ImGui::GetCursorScreenPos(), ImVec2(ImGui::GetCursorScreenPos().x + ImGui::GetContentRegionAvail().x, 35.0f))) {
 			if (ImGui::IsMouseClicked(0)) {
 				dragging = true;
@@ -906,7 +822,7 @@ namespace gui {
 			glfwGetWindowPos(window, &win_x, &win_y);
 			glfwSetWindowPos(window, static_cast<float>(win_x) + delta.x, static_cast<float>(win_y) + delta.y);
 		}
-		*/
+		
 		//const bool dragging = ImGui::IsMouseDragging(ImGuiMouseButton_Left);
 		//glfwSwapInterval(dragging ? 0 : 1);
 

@@ -182,4 +182,9 @@ namespace helpers {
         }
         return char_data;
     }
+
+    void clear_string(std::string& s) {
+        const char* const ptr = s.data();
+        SecureZeroMemory((void*)ptr, s.size());
+    }
 }

@@ -176,8 +176,6 @@ namespace database {
             j = nlohmann::json::parse(db_content);
         }
         catch (nlohmann::json::parse_error& e) {
-            //ui::message(e.what(), ui::UI_ERR);
-            //Sleep(3000);
             return;
         }
 

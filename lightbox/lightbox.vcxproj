@@ -72,12 +72,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClangTidyChecks>-Wall -Wextra -Weverything -Wno-c++98-compat -Weffc++</ClangTidyChecks>
-    <IncludePath>$(ProjectDir)\lib\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\lib\lib\;$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\vcpkg\vcpkg\installed\x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\vcpkg\vcpkg\installed\x64-windows\lib;$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)\lib\inc;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\lib\lib\;$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\vcpkg\vcpkg\installed\x64-windows\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\vcpkg\vcpkg\installed\x64-windows\lib;$(WindowsSDK_LibraryPath_x64);$(VC_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
