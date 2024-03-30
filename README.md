@@ -29,6 +29,10 @@ None. This password manager is built for offline use, it doesn't communicate wit
 ## ⚠️Warning⚠️
 Don't open other people's databases you get sent or find. Not a good idea, specially with this being on beta.
 
+## Dependencies (vcpkg)
+- GLFW3
+- glad
+
 ## Credits
 [this great fren](https://github.com/oiyl) for the help designing the gui!
 
