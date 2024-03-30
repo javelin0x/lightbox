@@ -174,4 +174,12 @@ namespace helpers {
             CloseClipboard();
         }
     }
+
+    std::vector<char> uint_to_char(const unsigned int* data, size_t size) {
+        std::vector<char> char_data(size);
+        for (size_t i = 0; i < size; ++i) {
+            char_data[i] = static_cast<char>(data[i]);
+        }
+        return char_data;
+    }
 }

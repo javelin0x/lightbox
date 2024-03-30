@@ -20,6 +20,10 @@
 #include "../db/enc/enc.h"
 #include "../pw/pw.h"
 
+#include "font/icon_font.cpp"
+#include "font/lexend_bold.cpp"
+#include "font/lexend_regular.cpp"
+
 //i strongly recommend avoiding looking at this file 
 
 ImFont* lexend_bold;
@@ -545,6 +549,40 @@ void creds_table(ImDrawList* draw_list)
 		//draw_list->AddLine
 	}
 
+	if (creds.size() == 0)
+	{
+		ImGui::SetCursorPos(ImVec2(210.0f, ImGui::GetCursorPosY() + 2.0f));
+		ImGui::PushFont(icon_font_regular);
+		ImGui::Text("I"); //save db
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			database::save_db(db_content, pw_hash);
+			logged_in = false;
+			creds.clear();
+			ImGui::PopFont();
+			ImGui::PopStyleVar();
+			ImGui::PopStyleColor(3);
+			db_loaded = false;
+			db_content.clear();
+			pw_hash.clear();
+			strcpy_s(cred_user_buf, "");
+			strcpy_s(cred_pw_buf, "");
+			return;
+		}
+		ImGui::SameLine();
+		ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() - 18.0f, ImGui::GetCursorPosY()));
+		ImGui::Text("H"); //save db
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			database::save_db(db_content, pw_hash);
+			creds_status = "database saved!";
+		}
+		ImGui::SameLine();
+		ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() - 18.0f, ImGui::GetCursorPosY() + 0.1f));
+		ImGui::Text("G"); //add credential
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			adding_cred = true;
+		}
+		ImGui::PopFont();
+	}
 
 	draw_list->AddLine(ImVec2(rect_min.x + 110.5f, rect_min.y), ImVec2(rect_min.x + 110.5f, rect_max.y - 2.0f), IM_COL32(78, 89, 89, 200), 2.0f);
 
@@ -1050,14 +1088,15 @@ namespace gui {
 		style.WindowRounding = 15.0f;
 
 		io.Fonts->AddFontDefault();
-		lexend_bold = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Bold.ttf").c_str(), 25);
-		lexend_bold_medium = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Bold.ttf").c_str(), 20);
-		lexend_bold_small = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Bold.ttf").c_str(), 18);
-		lexend_regular = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Regular.ttf").c_str(), 20);
-		lexend_bold_tab = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Bold.ttf").c_str(), 20);
-		lexend_regular_small = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Regular.ttf").c_str(), 17);
-		icon_font_regular = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\icon-font.otf").c_str(), 15);
-		lexend_regular_smallest = io.Fonts->AddFontFromFileTTF(std::string(cfg::exe_path + "\\Lexend-Regular.ttf").c_str(), 11);
+
+		lexend_bold = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_bold_compressed_data, lexend_bold_compressed_size, 25);
+		lexend_bold_medium = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_bold_compressed_data, lexend_bold_compressed_size, 20);
+		lexend_bold_small = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_bold_compressed_data, lexend_bold_compressed_size, 18);
+		lexend_regular = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_regular_compressed_data, lexend_regular_compressed_size, 20);
+		lexend_bold_tab = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_bold_compressed_data, lexend_bold_compressed_size, 20);
+		lexend_regular_small = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_regular_compressed_data, lexend_regular_compressed_size, 17);
+		icon_font_regular = io.Fonts->AddFontFromMemoryCompressedTTF(icon_font_compressed_data, icon_font_compressed_size, 15);
+		lexend_regular_smallest = io.Fonts->AddFontFromMemoryCompressedTTF(lexend_regular_compressed_data, lexend_regular_compressed_size, 11);
 
 		wnd_border_color_f[0] = wnd_border_color[0];
 		wnd_border_color_f[1] = wnd_border_color[1];

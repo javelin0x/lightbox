@@ -82,6 +82,15 @@
     <ClCompile Include="gui\imgui\imgui_widgets.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="gui\font\lexend_regular.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\font\lexend_bold.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\font\icon_font.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cfg\cfg.h" />

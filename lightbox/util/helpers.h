@@ -22,4 +22,5 @@ namespace helpers {
 	std::vector<unsigned char> file_to_vec(const std::string& path);
 	void bytes_to_file(const char* file_path, std::vector<unsigned char>& bytes);
 	void clear_clipboard();
+	std::vector<char> uint_to_char(const unsigned int* data, size_t size);
 }

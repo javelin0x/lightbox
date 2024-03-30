@@ -151,6 +151,9 @@
     <ClCompile Include="db\enc\argon2\opt.c" />
     <ClCompile Include="db\enc\argon2\thread.c" />
     <ClCompile Include="db\enc\enc.cpp" />
+    <ClCompile Include="gui\font\icon_font.cpp" />
+    <ClCompile Include="gui\font\lexend_bold.cpp" />
+    <ClCompile Include="gui\font\lexend_regular.cpp" />
     <ClCompile Include="gui\glad.c" />
     <ClCompile Include="gui\gui.cpp" />
     <ClCompile Include="gui\imgui\imgui.cpp" />
