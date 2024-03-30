@@ -148,7 +148,6 @@ namespace helpers {
     std::vector<unsigned char> file_to_vec(const std::string& path) {
         std::ifstream file(path, std::ios::binary);
         if (!file) {
-            //std::cerr << "Error opening file: " << filename << std::endl;
             return std::vector<unsigned char>();
         }
 
