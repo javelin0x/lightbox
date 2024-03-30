@@ -12,6 +12,7 @@ You can clone Lightbox locally from this Github repo and compile yourself, or gr
 -To run the program correctly place the fonts provided on gui/font on the same directory as the .exe runs. 
 -You can create a database by entering a master password and clicking on "create" on the login tab, this will create a .lbdb file named "db-" + number + ".lbdb" on the parent directory of the .exe. 
 -To add credentials, click on the "+" button on the lowest row, this brings up a dialog where you can enter a username and generate a password, or enter one manually. Once finished click on "add" and the credential will be added to your database, to save changes click on the save icon, otherwise you will lose your information if any crash happens.
+-Ideally, you would compile glfw by yourself, although I provide a compiled version on the [Releases](https://github.com/javelin0x/lightbox/releases/) tab.
 
 ## How do you store passwords?
 Lightbox stores passwords in different forms, but the general approach is creating an encrypted file which you will decrypt when you log in with your master password corresponding to that database. Once the database is decrypted, its plaintext contents are only loaded on the application (not decrypted to disk) until you close it.
