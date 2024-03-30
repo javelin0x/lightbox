@@ -803,7 +803,7 @@ namespace gui {
 
 		ImGui::Begin("lightbox", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
 		
-		
+		/*
 		if (ImGui::IsMouseHoveringRect(ImGui::GetCursorScreenPos(), ImVec2(ImGui::GetCursorScreenPos().x + ImGui::GetContentRegionAvail().x, 35.0f))) {
 			if (ImGui::IsMouseClicked(0)) {
 				dragging = true;
@@ -821,7 +821,7 @@ namespace gui {
 			int win_x, win_y;
 			glfwGetWindowPos(window, &win_x, &win_y);
 			glfwSetWindowPos(window, static_cast<float>(win_x) + delta.x, static_cast<float>(win_y) + delta.y);
-		}
+		}*/
 		
 		//const bool dragging = ImGui::IsMouseDragging(ImGuiMouseButton_Left);
 		//glfwSwapInterval(dragging ? 0 : 1);
