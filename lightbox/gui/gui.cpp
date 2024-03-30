@@ -545,6 +545,40 @@ void creds_table(ImDrawList* draw_list)
 		//draw_list->AddLine
 	}
 
+	if (creds.size() == 0)
+	{
+		ImGui::SetCursorPos(ImVec2(210.0f, ImGui::GetCursorPosY() + 2.0f));
+		ImGui::PushFont(icon_font_regular);
+		ImGui::Text("I"); //save db
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			database::save_db(db_content, pw_hash);
+			logged_in = false;
+			creds.clear();
+			ImGui::PopFont();
+			ImGui::PopStyleVar();
+			ImGui::PopStyleColor(3);
+			db_loaded = false;
+			db_content.clear();
+			pw_hash.clear();
+			strcpy_s(cred_user_buf, "");
+			strcpy_s(cred_pw_buf, "");
+			return;
+		}
+		ImGui::SameLine();
+		ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() - 18.0f, ImGui::GetCursorPosY()));
+		ImGui::Text("H"); //save db
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			database::save_db(db_content, pw_hash);
+			creds_status = "database saved!";
+		}
+		ImGui::SameLine();
+		ImGui::SetCursorPos(ImVec2(ImGui::GetCursorPosX() - 18.0f, ImGui::GetCursorPosY() + 0.1f));
+		ImGui::Text("G"); //add credential
+		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left)) {
+			adding_cred = true;
+		}
+		ImGui::PopFont();
+	}
 
 	draw_list->AddLine(ImVec2(rect_min.x + 110.5f, rect_min.y), ImVec2(rect_min.x + 110.5f, rect_max.y - 2.0f), IM_COL32(78, 89, 89, 200), 2.0f);
 
